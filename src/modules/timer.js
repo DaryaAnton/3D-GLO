@@ -3,15 +3,16 @@ const timerModule = (deadline) => {
     const timerHours = document.getElementById('timer-hours');
     const timerMinutes = document.getElementById('timer-minutes');
     const timerSeconds = document.getElementById('timer-seconds');
+    let idIntervalUpdateClock;
 
     const getTimeRemaining = () => {
 
-        let dateStop = new Date(deadline).getTime();
-        let dateNow = new Date().getTime();
-        let timeRemaining = (dateStop - dateNow) / 1000;
-        let hours = Math.floor(timeRemaining / 60 / 60);
-        let minutes = Math.floor((timeRemaining / 60) % 60);
-        let seconds = Math.floor(timeRemaining % 60);
+        const dateStop = new Date(deadline).getTime();
+        const dateNow = new Date().getTime();
+        const timeRemaining = (dateStop - dateNow) / 1000;
+        const hours = Math.floor(timeRemaining / 60 / 60);
+        const minutes = Math.floor((timeRemaining / 60) % 60);
+        const seconds = Math.floor(timeRemaining % 60);
 
         return {timeRemaining, hours, minutes, seconds,}
     };
@@ -24,10 +25,8 @@ const timerModule = (deadline) => {
         };
     };
 
-    let idIntervalUpdateClock;
-
     const updateClock = () => {
-        let getTime = getTimeRemaining();
+        const getTime = getTimeRemaining();
 
         timerHours.textContent = zero(getTime.hours);
         timerMinutes.textContent = zero(getTime.minutes);
@@ -39,7 +38,6 @@ const timerModule = (deadline) => {
             timerSeconds.textContent = '00';
             clearInterval(idIntervalUpdateClock);
         };
-        console.log('ghbdtn');
     };
 
     idIntervalUpdateClock = setInterval(updateClock, 1000);
