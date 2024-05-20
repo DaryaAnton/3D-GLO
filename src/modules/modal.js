@@ -17,8 +17,6 @@ const modalModule = () => {
         modal.style.display = 'none';
     });
 
-    console.dir(window.screen.width);
-
     function animationModal(elem, duration) {
         var start = null;
         function step(mark) {
