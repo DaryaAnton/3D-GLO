@@ -1,20 +1,23 @@
 const menuModule = () => {
     const menuBtn = document.querySelector('.menu');
     const menu = document.querySelector('menu');
-    const closeBtn = menu.querySelector('.close-btn');
     const menuItems = menu.querySelectorAll('ul>li>a');
 
-    const handleMenu = () => {
-        menu.classList.toggle('active-menu');
-    };
-
-    menuBtn.addEventListener('click', () => {
-        handleMenu();
+    menuBtn.addEventListener('click', (e) =>{
+        if (e.target.closest('.menu')) {
+            menu.classList.toggle('active-menu');
+        };
     });
 
-    closeBtn.addEventListener('click', handleMenu);
-
-    menuItems.forEach(menuItem => menuItem.addEventListener('click', handleMenu));
+    menu.addEventListener('click', (e) => {
+        menuItems.forEach((link, ) => {
+            link.addEventListener('click', () => {
+                menu.classList.toggle('active-menu');
+            });
+        });
+        if (e.target.closest('.close-btn') || e.target.closest('menuItems')) {
+            menu.classList.toggle('active-menu');
+        }
+    });
 }
-
 export default menuModule;

@@ -1,23 +1,18 @@
 const modalModule = () => {
     const buttons = document.querySelectorAll('.popup-btn');
     const modal = document.querySelector('.popup');
-    const closeBtn = modal.querySelector('.popup-close');
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             modal.style.display = 'block';
             if (window.screen.width > 768) {
-                animationModal(modal, 1500);
+                animationModal(modal, 500);
             }
         });
-    });
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
     });
 
     function animationModal(elem, duration) {
         let start;
-        
         function step(timestamp) {
             if (!start) {
                 start = timestamp;
@@ -31,6 +26,13 @@ const modalModule = () => {
         };
         requestAnimationFrame(step);
     }
+
+    modal.addEventListener('click', (e) => {
+
+        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+            modal.style.display = 'none';
+        };
+    });
 };
 
 export default modalModule;
