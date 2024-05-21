@@ -1,23 +1,25 @@
 const menuModule = () => {
-    const menuBtn = document.querySelector('.menu');
+    // const menuBtn = document.querySelector('.menu');
     const menu = document.querySelector('menu');
-    const menuItems = menu.querySelectorAll('ul>li>a');
+    // const closeBtn = menu.querySelector('.close-btn');
+    // const menuItems = menu.querySelectorAll('ul>li>a');
 
-    menuBtn.addEventListener('click', (e) =>{
-        if (e.target.closest('.menu')) {
-            menu.classList.toggle('active-menu');
-        };
-    });
+    const toggleMenu = () => {
+		const handlerMenu = () => {
+			const even = event.target;
 
-    menu.addEventListener('click', (e) => {
-        menuItems.forEach((link, ) => {
-            link.addEventListener('click', () => {
-                menu.classList.toggle('active-menu');
-            });
-        });
-        if (e.target.closest('.close-btn') || e.target.closest('menuItems')) {
-            menu.classList.toggle('active-menu');
-        }
-    });
+			const show = () => {
+				menu.classList.toggle('active-menu');
+			};
+
+			if (even.closest('.menu') || !even.closest('menu')) {
+				show();
+			} else if (even.closest('menu') && even.closest('[href^="#"]')) {
+				show();
+			}
+		};
+		document.body.addEventListener('click', handlerMenu);
+	};
+    toggleMenu();
 }
 export default menuModule;
