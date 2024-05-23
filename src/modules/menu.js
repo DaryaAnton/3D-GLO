@@ -5,12 +5,18 @@ const menuModule = () => {
 		const show = () => {
 			menu.classList.toggle('active-menu');
 		};
-
-		if (event.target.closest('.menu') || !event.target.closest('menu')) {
-			show();
-		} else if (event.target.closest('menu') && event.target.closest('[href^="#"]')) {
-			show();
-		}
+		if (menu.classList.contains('active-menu')) {
+			if (!event.target.closest('menu')) {
+				console.log(!event.target.closest('menu'));
+				show();
+			};
+			if (event.target.closest('menu') && event.target.closest('[href^="#"]')) {
+				show();
+			}
+		};
+		if (event.target.closest('.menu')) {
+				show();
+		};
 	};
 	document.body.addEventListener('click', toggleMenu);
 }
