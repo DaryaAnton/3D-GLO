@@ -27,6 +27,9 @@ const calculatorModal = (price = 100) => {
         let calcCountValue = 1;
         let calcDayValue = 1;
 
+        let count = 0;
+        
+
         if (calcCount.value > 1) {
             calcCountValue += +calcCount.value / 10;
         };
@@ -43,6 +46,16 @@ const calculatorModal = (price = 100) => {
             totalValue = 0
         };
         total.textContent = totalValue;
+        
+        const interval = setInterval(() => {
+            count++;
+            const currentValue = count * 10;
+            total.textContent = currentValue;
+
+            if (currentValue >= totalValue) {
+                clearInterval(interval);
+            }
+        }, 10);
     };
     
     calcBlock.addEventListener('input', (e) => {
