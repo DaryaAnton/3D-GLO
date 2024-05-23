@@ -8,20 +8,19 @@ const sliderModule = () => {
     let interval;
 
     const addDots = () => {
-        slides.forEach((index) => {
+        slides.forEach((slide, index) => {
             const li = document.createElement('li');
             li.classList.add('dot');
             
-            if(index == 0) {
+            if(index === 0) {
                 li.classList.add('dot-active')
             }
 
             dotsBlock.append(li);
         })
+        dots = document.querySelectorAll('.dot');
     };
-    addDots()
-    dots = document.querySelectorAll('.dot');
-
+    
     const prevSlide = (elems, index, srtClass) => {
         elems[index].classList.remove(srtClass);
     };
@@ -94,5 +93,6 @@ const sliderModule = () => {
     }, true);
 
     startSlide(timerInterval);
+    addDots();
 }
 export default sliderModule;
