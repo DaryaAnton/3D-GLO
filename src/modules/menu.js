@@ -1,25 +1,17 @@
 const menuModule = () => {
-    // const menuBtn = document.querySelector('.menu');
     const menu = document.querySelector('menu');
-    // const closeBtn = menu.querySelector('.close-btn');
-    // const menuItems = menu.querySelectorAll('ul>li>a');
 
-    const toggleMenu = () => {
-		const handlerMenu = () => {
-			const even = event.target;
-
-			const show = () => {
-				menu.classList.toggle('active-menu');
-			};
-
-			if (even.closest('.menu') || !even.closest('menu')) {
-				show();
-			} else if (even.closest('menu') && even.closest('[href^="#"]')) {
-				show();
-			}
+	const toggleMenu = (event) => {
+		const show = () => {
+			menu.classList.toggle('active-menu');
 		};
-		document.body.addEventListener('click', handlerMenu);
+
+		if (event.target.closest('.menu') || !event.target.closest('menu')) {
+			show();
+		} else if (event.target.closest('menu') && event.target.closest('[href^="#"]')) {
+			show();
+		}
 	};
-    toggleMenu();
+	document.body.addEventListener('click', toggleMenu);
 }
 export default menuModule;
