@@ -1,3 +1,5 @@
+import {animate} from './helpers';
+
 const calculatorModal = (price = 100) => {
     const calcSquare = document.querySelector('.calc-square');
     const calcCount = document.querySelector('.calc-count');
@@ -46,16 +48,16 @@ const calculatorModal = (price = 100) => {
             totalValue = 0
         };
         total.textContent = totalValue;
-        
-        const interval = setInterval(() => {
-            count++;
-            const currentValue = count * 10;
-            total.textContent = currentValue;
 
-            if (currentValue >= totalValue) {
-                clearInterval(interval);
+        animate({
+            duration: 1000,
+            timing(timeFraction) {
+              return timeFraction;
+            },
+            draw(progress) {
+            total.textContent = Math.round(progress * totalValue);
             }
-        }, 10);
+        });
     };
     
     calcBlock.addEventListener('input', (e) => {
