@@ -5,6 +5,7 @@ import calculator from './modules/calculator';
 import validation from './modules/validation';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
+import sendForm from './modules/sendForm';
 
 timer('22 may 2024');
 menu();
@@ -13,3 +14,17 @@ calculator(100);
 validation();
 tabs();
 slider();
+const formAll = document.querySelectorAll('form');
+formAll.forEach((form) => {
+    sendForm(
+        {
+            formId: form.id,
+            someElement: [
+                {
+                   type: 'block',
+                   id: 'total' 
+                }
+            ]
+        }
+    );
+});
