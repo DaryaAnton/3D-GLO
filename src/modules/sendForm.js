@@ -1,3 +1,5 @@
+import {animate} from './helpers';
+
 const sendFormModule = ({formId, someElement = []}) => {
     const form = document.getElementById(formId);
     const statusBlock = document.createElement('div');
@@ -30,7 +32,20 @@ const sendFormModule = ({formId, someElement = []}) => {
         const formData = new FormData(form)
         const formBody = {};
 
-        statusBlock.textContent = loadText;
+        // statusBlock.textContent = loadText;
+        statusBlock.style.backgroundColor = '#19b5fe'
+        statusBlock.style.height = 20 + 'px'
+        statusBlock.style.marginTop = 30 + 'px'
+
+        animate({
+            duration: 1000,
+            timing(timeFraction) {
+              return timeFraction;
+            },
+            draw(progress) {
+            statusBlock.style.width = progress * 100 + '%';
+            }
+        });
         form.append(statusBlock)
 
         formData.forEach((val, key) => {
@@ -51,12 +66,14 @@ const sendFormModule = ({formId, someElement = []}) => {
             .then(data => {
                 console.log(data);
                 statusBlock.textContent = successText;
+                statusBlock.style.backgroundColor = 'transparent'
                 formElements.forEach(input => {
                     input.value = '';
                 })
             })
             .catch(error => {
-                statusBlock.textContent = successText;
+                statusBlock.textContent = errorText;
+                statusBlock.style.backgroundColor = 'transparent'
             })
         }else {
             alert('Данные не валидны!')

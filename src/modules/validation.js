@@ -38,7 +38,13 @@ const validationModal = () => {
         });
     });
     userMessage.addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace(/[^а-яА-Я\-\s]/, "");
+        e.target.value = e.target.value.replace(/[^а-яА-Я\-\s]/, "");
+
+        if (e.target.value !== '') {
+            e.target.classList.add('success');
+        }else {
+            e.target.classList.remove('success');
+        }
     });
 };
 
