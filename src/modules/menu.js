@@ -7,7 +7,6 @@ const menuModule = () => {
 		};
 		if (menu.classList.contains('active-menu')) {
 			if (!event.target.closest('menu')) {
-				console.log(!event.target.closest('menu'));
 				show();
 			};
 			if (event.target.closest('menu') && event.target.closest('[href^="#"]')) {

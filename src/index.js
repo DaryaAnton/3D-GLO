@@ -6,8 +6,9 @@ import validation from './modules/validation';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import sendForm from './modules/sendForm';
+import swiperSlider from './modules/swiperSlider';
 
-timer('22 may 2024');
+timer('03 june 2024');
 menu();
 modal();
 calculator(100);
@@ -28,3 +29,4 @@ formAll.forEach((form) => {
         }
     );
 });
+swiperSlider();

@@ -1,11 +1,6 @@
-import {animate} from './helpers';
-
 const sendFormModule = ({formId, someElement = []}) => {
     const form = document.getElementById(formId);
     const statusBlock = document.createElement('div');
-    const loadText = 'Загрузка...';
-    const errorText = 'Ошибка...';
-    const successText = 'Спасибо! Наш менеджер с Вами свяжется!';
 
     const validate = (list) => {
         let success = true;
@@ -27,33 +22,43 @@ const sendFormModule = ({formId, someElement = []}) => {
         }).then(response => response.json())
     };
 
+    const statusSubmit = (status) => {
+        const img = document.createElement('img');
+        const statusVariants = {
+            load: {
+                message: ' Загрузка...',
+                img: './images/status/loader.gif'
+            },
+            success: {
+                message: 'Спасибо! Наш менеджер с Вами свяжется!',
+                img: './images/status/ok.svg'
+            },
+            error: {
+                message: 'Ошибка...',
+                img: './images/status/stop.svg'
+            }
+        };
+        statusBlock.textContent = statusVariants[status].message;
+        img.src = statusVariants[status].img;
+        img.height = 50;
+
+        statusBlock.insertBefore(img, statusBlock.firstChild);
+        form.append(statusBlock)
+    };
+
+    statusBlock.style.cssText = 'font-size: 14px; color: #fff';
+
     const submitForm = () => {
         const formElements = form.querySelectorAll('input')
         const formData = new FormData(form)
         const formBody = {};
-
-        // statusBlock.textContent = loadText;
-        statusBlock.style.backgroundColor = '#19b5fe'
-        statusBlock.style.height = 20 + 'px'
-        statusBlock.style.marginTop = 30 + 'px'
-
-        animate({
-            duration: 1000,
-            timing(timeFraction) {
-              return timeFraction;
-            },
-            draw(progress) {
-            statusBlock.style.width = progress * 100 + '%';
-            }
-        });
-        form.append(statusBlock)
 
         formData.forEach((val, key) => {
             formBody[key] = val;
         });
         someElement.forEach((elem) => {
             const element = document.getElementById(elem.id)
-            console.log(element);
+
             if (elem.type === 'block') {validate(formElements)
                 formBody[elem.id] = element.textContent;
             }else if (elem.type === 'input') {
@@ -64,16 +69,20 @@ const sendFormModule = ({formId, someElement = []}) => {
         if (validate(formElements)) {
             sendData(formBody)
             .then(data => {
-                console.log(data);
-                statusBlock.textContent = successText;
-                statusBlock.style.backgroundColor = 'transparent'
+
+                statusSubmit('success');
+                setTimeout(function () {
+                    statusBlock.remove();
+                 }, 5000)
                 formElements.forEach(input => {
                     input.value = '';
                 })
             })
             .catch(error => {
-                statusBlock.textContent = errorText;
-                statusBlock.style.backgroundColor = 'transparent'
+                statusSubmit('error');
+                setTimeout(function () {
+                    statusBlock.remove();
+                 }, 5000)
             })
         }else {
             alert('Данные не валидны!')
@@ -89,9 +98,10 @@ const sendFormModule = ({formId, someElement = []}) => {
             event.preventDefault();
     
             submitForm()
+            statusSubmit('load');
         });
     }catch(error) {
-        console.log(error.message);
+        error.message;
     }
 };
 

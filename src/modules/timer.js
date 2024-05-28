@@ -40,7 +40,7 @@ const timerModule = (deadline) => {
         };
     };
 
-    idIntervalUpdateClock = setInterval(updateClock, 1000);
+    idIntervalUpdateClock = setInterval(updateClock, 0);
 };
 
 export default timerModule;

@@ -28,7 +28,7 @@ const validationModal = () => {
     });
     userPhone.forEach(input => {
         input.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^0-9\(\)\-]/gi, "");
+            e.target.value = e.target.value.replace(/[^0-9\(\)\-\+]/gi, "");
 
             if (e.target.value !== '') {
                 e.target.classList.add('success');
@@ -38,7 +38,7 @@ const validationModal = () => {
         });
     });
     userMessage.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/[^а-яА-Я\-\s]/, "");
+        e.target.value = e.target.value.replace(/[^а-яА-Я\-\s\0-9\?]/, "");
 
         if (e.target.value !== '') {
             e.target.classList.add('success');
