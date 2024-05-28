@@ -39,8 +39,8 @@ const timerModule = (deadline) => {
             clearInterval(idIntervalUpdateClock);
         };
     };
-
-    idIntervalUpdateClock = setInterval(updateClock, 0);
+    updateClock()
+    idIntervalUpdateClock = setInterval(updateClock, 1000);
 };
 
 export default timerModule;

@@ -73,7 +73,7 @@ const sendFormModule = ({formId, someElement = []}) => {
                 statusSubmit('success');
                 setTimeout(function () {
                     statusBlock.remove();
-                 }, 5000)
+                 }, 3000)
                 formElements.forEach(input => {
                     input.value = '';
                 })
@@ -82,7 +82,7 @@ const sendFormModule = ({formId, someElement = []}) => {
                 statusSubmit('error');
                 setTimeout(function () {
                     statusBlock.remove();
-                 }, 5000)
+                 }, 3000)
             })
         }else {
             alert('Данные не валидны!')
