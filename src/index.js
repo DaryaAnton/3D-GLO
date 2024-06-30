@@ -8,7 +8,7 @@ import slider from './modules/slider';
 import sendForm from './modules/sendForm';
 import swiperSlider from './modules/swiperSlider';
 
-timer('03 june 2024');
+timer('03 august 2024');
 menu();
 modal();
 calculator(100);
